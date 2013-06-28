@@ -1,6 +1,6 @@
 name             'posix-acl'
-maintainer       'YOUR_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Jon Chappell'
+maintainer_email 'jon@jchome.us'
 license          'All rights reserved'
 description      'Installs/Configures posix-acl'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
