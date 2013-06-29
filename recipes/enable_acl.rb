@@ -59,7 +59,7 @@ acl_flag_applied = true
 
 execute 'remount_root' do
   action  :run, :immediately
-  not_if acl_flag_applied == true
+  not_if acl_flag_applied == false
 end
 
 ####################################################################################
