@@ -26,7 +26,6 @@ end
 ruby_block "modify_fstab" do
   action :create
   block do
-
       # Back up our original file, because bad things can happen.
       %x[ cp #{node.posix_acl.fstab_path} #{node.posix_acl.fstab_backup} ]
 

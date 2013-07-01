@@ -13,4 +13,4 @@ actions :create, :remove
 default_action :create
 
 attribute :template_name, :kind_of => String, :required => true, :default => name
-attribute :wrapper_cookbook, :kind_of => String, :default => "posix-acl"
+attribute :wrapper_cookbook, :kind_of => String, :required => true, :default => "posix-acl"

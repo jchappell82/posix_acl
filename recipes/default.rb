@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-
-
 # Enable ACL support
 include_recipe "posix_acl::enable_acl"
 
