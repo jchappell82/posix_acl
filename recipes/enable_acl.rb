@@ -23,7 +23,7 @@ end
 ## Modify the fstab file provided in attributes to include the acl flag.
 # FIXME: Ideally, I'll work out a way to apply this to an array of mount points instead of just one
 
-ruby_block "modify_fstab" do
+ruby_block 'modify_fstab' do
   action :create
   block do
     # Back up our original file, because bad things can happen.
@@ -37,7 +37,7 @@ ruby_block "modify_fstab" do
 
     # And again on whitespace!
     f.each_with_index do |line, index|
-      f[index] = f[index].split(" ")
+      f[index] = f[index].split(' ')
     end
 
     # Now we'll add the requisite 'acl' flag to the fstab opts.
@@ -49,7 +49,7 @@ ruby_block "modify_fstab" do
 
     # Put it all back together
     f.each_with_index do |line, index|
-      f[index] = f[index].join(" ")
+      f[index] = f[index].join(' ')
     end
     # One line per entry
     f = f.join("\n")

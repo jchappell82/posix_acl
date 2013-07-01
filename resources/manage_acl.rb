@@ -14,3 +14,4 @@ default_action :apply
 
 attribute :apply_to, :kind_of => String
 attribute :template_name, :kind_of => String, :required => true
+attribute :recursive, :kind_of => [TrueClass, FalseClass], :default => false
