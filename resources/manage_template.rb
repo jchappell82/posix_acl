@@ -8,9 +8,8 @@
 #
 
 # You'll need to explicitly use an "action": "remove" to delete an ACL template
-actions :create, :remove
+actions :create, :delete
 
 default_action :create
 
 attribute :template_name, :kind_of => String, :required => true, :default => name
-attribute :wrapper_cookbook, :kind_of => String, :required => true, :default => "posix-acl"

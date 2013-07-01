@@ -14,5 +14,3 @@ default_action :apply
 
 attribute :apply_to, :kind_of => String
 attribute :template_name, :kind_of => String, :required => true
-attribute :wrapper_cookbook, :kind_of => String, :default => "posix-acl"
-
