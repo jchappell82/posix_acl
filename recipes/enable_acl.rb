@@ -65,24 +65,3 @@ ruby_block "modify_fstab" do
   notifies :run, 'execute[remount_fs]', :immediately
 end
 
-####################################################################################
-
-
-# We can get rid of all of the below once the stuff above works.
-
-# Set acl flag for filesystems
-
-# We are going to set the acl flag for anything that has an "atime" flag in fstab
-# as that should account for many normal filesystems.  We will assume this is
-# not needed if fstab has any mention of the word acl.
-
-#bash 'root_set_acl' do
-#  code <<-EOH
-#    cp /etc/fstab /etc/fstab.bak
-#    sed -i s/atime/atime,acl/g /etc/fstab
-#  EOH
-#  cwd '/etc'
-#  not_if 'grep -q -e "acl" /etc/fstab'
-#  notifies :run, 'execute[remount_root]', :immediately
-#  user 'root'
-#end
