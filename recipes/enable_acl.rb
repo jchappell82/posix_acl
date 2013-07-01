@@ -20,10 +20,7 @@ execute 'remount_fs' do
 end
 
 
-####################################################################################
-# We only need to do this block if the required 'acl' flag is not already in place #
-####################################################################################
-
+## Modify the fstab file provided in attributes to include the acl flag.
 # FIXME: Ideally, I'll work out a way to apply this to an array of mount points instead of just one
 
 ruby_block "modify_fstab" do
@@ -67,7 +64,6 @@ ruby_block "modify_fstab" do
   not_if "grep -e #{node.posix_acl.mount_point_device} #{node.posix_acl.fstab_path} | grep -e acl"
   notifies :run, 'execute[remount_fs]', :immediately
 end
-
 
 ####################################################################################
 
