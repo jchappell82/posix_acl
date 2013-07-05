@@ -14,7 +14,7 @@ end
 use_inline_resources
 
 action :apply do
-  if @new_resource.recursive
+  if new_resource.recursive
     recursive_flag = '-R '
   else
     recursive_flag = ''
@@ -26,10 +26,11 @@ action :apply do
     EOH
     user 'root'
   end
+  new_resource.updated_by_last_action(true)
 end
 
 action :remove do
-  if @new_resource.recursive
+  if new_resource.recursive
     recursive_flag = '-R '
   else
     recursive_flag = ''
@@ -39,4 +40,5 @@ action :remove do
       setfacl -b #{recursive_flag}#{new_resource.apply_to}
     EOH
   end
+  new_resource.updated_by_last_action(true)
 end

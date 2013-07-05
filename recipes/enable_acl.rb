@@ -15,7 +15,7 @@ package 'acl'
 # Remounts the root filesystem when called
 execute 'remount_fs' do
   action :nothing
-  command "mount -o remount #{node.posix_acl.mount_point}"
+  command "mount -o remount #{node['posix_acl']['mount_point']}"
   user 'root'
 end
 
@@ -27,10 +27,10 @@ ruby_block 'modify_fstab' do
   action :create
   block do
     # Back up our original file, because bad things can happen.
-    %x[ cp #{node.posix_acl.fstab_path} #{node.posix_acl.fstab_backup} ]
+    %x[ cp #{node['posix_acl']['fstab_path']} #{node['posix_acl']['fstab_backup']} ]
 
     # Open our file as specified via attributes and read it to a variable
-    f = File.open("#{node.posix_acl.fstab_path}", 'r').read
+    f = File.open(node['posix_acl']['fstab_path'], 'r').read
 
     # Now we're going to split on newlines.
     f = f.split("\n")
@@ -42,7 +42,7 @@ ruby_block 'modify_fstab' do
 
     # Now we'll add the requisite 'acl' flag to the fstab opts.
     f.each_with_index do |line, index|
-      if f[index][0].include? "#{node.posix_acl.mount_point_device}"
+      if f[index][0].include? node['posix_acl']['mount_point_device']
         f[index][3] = f[index][3] + ',acl'
       end
     end
@@ -56,11 +56,11 @@ ruby_block 'modify_fstab' do
     f = f + "\n"
 
     # SAVE ALL THE THINGS
-    out = File.open("#{node.posix_acl.fstab_path}", 'w')
+    out = File.open(node['posix_acl']['fstab_path'], 'w')
     out.write(f)
     out.close
   end
-  not_if "grep -e #{node.posix_acl.mount_point_device} #{node.posix_acl.fstab_path} | grep -e acl"
+  not_if "grep -e #{node['posix_acl']['mount_point_device']} #{node['posix_acl']['fstab_path']} | grep -e acl"
   notifies :run, 'execute[remount_fs]', :immediately
 end
 
