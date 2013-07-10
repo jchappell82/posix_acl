@@ -21,18 +21,21 @@ action :create do
     group 'root'
   end
 
-  cookbook_file node['posix_acl']['template_store']/new_resource.template_name do
+  template "#{node['posix_acl']['template_store']}/#{new_resource.template_name}" do
     action :create
+    cookbook 'posix_acl'
     owner 'root'
     mode 00664
     group 'root'
-    source new_resource.template_name
+    source 'acl_template.erb'
+    variables :template_content => new_resource.template_content
   end
+
   new_resource.updated_by_last_action(true)
 end
 
 action :delete do
-  cookbook_file node['posix_acl']['template_store']/new_resource.template_name do
+  file "#{node['posix_acl']['template_store']}/#{new_resource.template_name}" do
     action :delete
   end
 end

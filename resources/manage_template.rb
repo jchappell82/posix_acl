@@ -13,3 +13,4 @@ actions :create, :delete
 default_action :create
 
 attribute :template_name, :kind_of => String, :required => true, :default => name
+attribute :template_content, :kind_of => Array, :required => true
