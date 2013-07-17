@@ -37,9 +37,9 @@ This is an example of applying ACLs from a template that has been created:
 
 posix_acl_manage_acl 'apply_vagrant' do
   action :apply  # This can also be :remove
-  apply_to '/opt'
+  apply_to '/opt' # The path to apply ACLs to.
   template_name 'vagrant_template' # If you are removing ACLs, you don't need this.
-  recursive true
+  recursive true # If your 'apply_to' value is a file, this must be false.
 end
 
 # Attributes
