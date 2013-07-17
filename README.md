@@ -10,6 +10,8 @@ ACL templates, or specific ACL patterns you wish to apply.
 To begin, simply add ```include_recipe "posix-acl::default"``` to your implementing cookbook.  This
 will ensure that acl support is enabled and that the requisite OS package is installed.
 
+After adding the default recipe, you will need to override the default attributes so that they match your environment.
+
 This is an example of how to create a template from within your wrapper cookbook:
 
 ```ruby
